@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
@@ -12,9 +13,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PrintController;
-use App\Models\Customer;
-use App\Models\Order;
-use App\Models\OrderProduct;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -58,6 +56,7 @@ Route::group(
             Route::resource('orders', OrderController::class);
             Route::resource('notifications', NotificationController::class);
             Route::resource('messages', MessageController::class);
+            Route::resource('ads', AdController::class);
 
 
             Route::get('/export-orders-excel', [OrderController::class, 'exportExcel'])->name('export.excel');

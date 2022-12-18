@@ -50,6 +50,7 @@ class Customer extends Authenticatable
 
     public function routeNotificationForFcm()
     {
-        return $this->deviceTokens->pluck('token')->toArray();
+        // return $this->deviceTokens->pluck('token')->toArray();
+        return $this->deviceTokens()->orderBy('id', 'desc')->pluck('token')->first();
     }
 }

@@ -20,10 +20,23 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         try {
+
             if ($request->ajax()) {
                 $order = Order::get();
                 return DataTables::of($order)
                     ->addIndexColumn()
+                    ->addColumn('username', function ($row) {
+                        $btn = $row->customer->name;
+                        return $btn;
+                    })
+                    ->addColumn('phone', function ($row) {
+                        $btn = $row->customer->phone;
+                        return $btn;
+                    })
+                    ->addColumn('address', function ($row) {
+                        $btn = $row->customer->address;
+                        return $btn;
+                    })
                     ->addColumn('action', function ($row) {
                         $btn = $this->h_show(route('admin.orders.show', $row->id));
                         $btn = $btn . ' ' . $this->h_edit(route('admin.orders.edit', $row->id));

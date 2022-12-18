@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDeletedAtToOrdersTable extends Migration
+class CreateAdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddDeletedAtToOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->softDeletes();
+        Schema::create('ads', function (Blueprint $table) {
+            $table->id();
+            $table->string('photo');
+            $table->string('target');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddDeletedAtToOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('ads');
     }
 }
