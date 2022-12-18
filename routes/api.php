@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('product/types/{id}', [ProductController::class, 'show']); // get types related to each product
     Route::post('order/store', [OrderController::class, 'store']); // get orders related to each user 
     Route::get('customer/orders', [OrderController::class, 'show']); // get orders related to each user 
-    Route::delete('order/cancel/{order_id}', [OrderController::class, 'delete']);
+    Route::delete('order/cancel/{order_id}', [OrderController::class, 'cancel']);
     Route::get('cart', [CartController::class, 'index']);
     Route::post('add-to-cart', [CartController::class, 'store']);
     Route::post('delete/product/cart', [CartController::class, 'deleteProduct']);

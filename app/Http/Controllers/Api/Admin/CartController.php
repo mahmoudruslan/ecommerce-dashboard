@@ -10,6 +10,8 @@ use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isEmpty;
+
 class CartController extends Controller
 {
     use GeneralTrait;
@@ -18,9 +20,8 @@ class CartController extends Controller
         try {
             $customer = auth()->guard('sanctum')->user();
             $cart = $customer->cart;
-            if($cart)
-            {
-                $cart_products = $cart->Products->map(function($row){
+            if ($cart) {
+                $cart_products = $cart->Products->map(function ($row) {
                     $product = Product::find($row->product_id);
                     $row->name = $product->name_ar;
                     $row->details = $product->details_ar;
@@ -34,7 +35,6 @@ class CartController extends Controller
                 return $this->returnData('cart', $cart_products);
             }
             return $this->returnData('cart', []);
-
         } catch (\Exception $e) {
             return $this->returnError('500', __('not found'));
         }
@@ -46,11 +46,19 @@ class CartController extends Controller
             $cart = Cart::updateOrCreate([
                 'customer_id' => Auth::guard('sanctum')->user()->id
             ]);
-            CartProduct::updateOrCreate([
-                'cart_id' => $cart->id,
-                'product_id' => $request->product_id,
-                'quantity' => $request->quantity
-            ]);
+            $product = $cart->products->where('cart_id', $cart->id)->where('product_id', $request->product_id)->first();
+            if(empty($product)){
+                CartProduct::Create([
+                    'cart_id' => $cart->id,
+                    'product_id' => $request->product_id,
+                    'quantity' => $request->quantity
+                ]);
+            }else{
+                $product->update([
+                    'quantity' => $product->quantity + 1,
+                ]);
+            }
+            
             return $this->returnSuccess('200', __('Created Successfully'));
         } catch (\Exception $e) {
             return $this->returnError('500', $e->getMessage());
@@ -96,12 +104,19 @@ class CartController extends Controller
     {
         try {
             $customer_cart = auth()->guard('sanctum')->user()->cart;
-            $product = $customer_cart->products->where('product_id', $request->product_id)->first();
-            if ($product->quantity > 1)
-                $product->update([
-                    'quantity' => $product->quantity - 1,
-                ]);
-            return $this->returnData('quantity', $product->quantity);
+            $product = $customer_cart->products->where('product_id', $request->product_id)->firstOrFail();
+            if($product)
+            {
+                if ($product->quantity > 1) {
+                    $product->update([
+                        'quantity' => $product->quantity - 1,
+                    ]);
+                    return $this->returnData('quantity', $product->quantity);
+                }
+                $product->delete();
+                return $this->returnSuccess('200', __('Product removed'));
+            }
+            return $this->returnSuccess('200', __('Product removed'));
         } catch (\Exception $e) {
             return $this->returnError('500', $e->getMessage());
         }

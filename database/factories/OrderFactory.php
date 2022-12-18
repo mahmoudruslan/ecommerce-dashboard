@@ -25,7 +25,7 @@ class OrderFactory extends Factory
     {   
         $customers = Customer::pluck('id');
         return [
-            'status' => rand(0, 4),
+            'status' => 5,
             'customer_id' => $customers->random(),
         ];
     }

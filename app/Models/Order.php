@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Order extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = ['notes',  'customer_id',  'status', 'price'];
     protected $hidden = ['customer_id', 'updated_at'];
@@ -43,9 +42,12 @@ class Order extends Model
                 return __('To fail');
                 break;
             case '3':
-                return __('Delivery');
+                return __('Pending');
                 break;
             case '4':
+                return __('Delivery');
+                break;
+            case '5':
                 return __('Successfully delivered');
                 break;
             default:
@@ -55,7 +57,7 @@ class Order extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return date('d-m-Y', strtotime($value));
+        return date('d-m-Y H:i', strtotime($value));
     }
     public function getNotesAttribute($value)
     {
