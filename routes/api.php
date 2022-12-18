@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\AdController;
 use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\CartController;
 use App\Http\Controllers\Api\Admin\CategoryController;
@@ -32,11 +33,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('active/account', [AuthController::class, 'activeAccount']);
     Route::get('categories', [CategoryController::class, 'index']);
     Route::get('inner_categories/{category_id}', [CategoryController::class, 'show']);
-    Route::get('inner_category/products/{inner_category_id}', [InnerCategoryController::class, 'show']); // get Products related to each category 
+    Route::get('inner_category/products/{inner_category_id}', [InnerCategoryController::class, 'show']);
     Route::get('products', [ProductController::class, 'index']);
-    Route::get('product/types/{id}', [ProductController::class, 'show']); // get types related to each product
-    Route::post('order/store', [OrderController::class, 'store']); // get orders related to each user 
-    Route::get('customer/orders', [OrderController::class, 'show']); // get orders related to each user 
+    Route::get('product/types/{id}', [ProductController::class, 'show']); 
+    Route::post('order/store', [OrderController::class, 'store']);
+    Route::get('customer/orders', [OrderController::class, 'show']);
     Route::delete('order/cancel/{order_id}', [OrderController::class, 'cancel']);
     Route::get('cart', [CartController::class, 'index']);
     Route::post('add-to-cart', [CartController::class, 'store']);
@@ -44,5 +45,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('delete/cart', [CartController::class, 'deleteCart']);
     Route::post('increase', [CartController::class, 'increase']);
     Route::post('decrease', [CartController::class, 'decrease']);
+    Route::get('ads', [AdController::class, 'index']);
+
     
 });
