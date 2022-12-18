@@ -49,11 +49,14 @@
                         <thead>
                             <tr>
                                 <th class="text-center">{{ __('#') }}</th>
-                                <th class="text-center">{{ __('Notes') }}</th>
+                                <th class="text-center">{{ __('Customer Name') }}</th>
+                                <th class="text-center">{{ __('Phone Number') }}</th>
+                                <th class="text-center">{{ __('Address') }}</th>
                                 <th class="text-center">{{ __('Price') }}</th>
                                 <th class="text-center">{{ __('Status') }}</th>
-                                {{-- <th class="text-center">{{ __('Customer') }}</th>
-                                <th class="text-center">{{ __('Order Date') }}</th> --}}
+                                <th class="text-center">{{ __('Order Date') }}</th>
+                                <th class="text-center">{{ __('Notes') }}</th>
+
                                 <th class="text-center">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
@@ -79,8 +82,16 @@
                     name: 'DT_RowIndex'
                 },
                 {
-                    data: 'notes',
-                    name: 'notes'
+                    data: 'username',
+                    name: 'username'
+                },
+                {
+                    data: 'phone',
+                    name: 'phone'
+                },
+                {
+                    data: 'address',
+                    name: 'address'
                 },
                 {
                     data: 'price',
@@ -90,14 +101,14 @@
                     data: 'status',
                     name: 'status'
                 },
-                // {
-                //     data: 'username',
-                //     name: 'username'
-                // },
-                // {
-                //     data: 'created_at',
-                //     name: 'created_at'
-                // },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
+                },
+                {
+                    data: 'notes',
+                    name: 'notes'
+                },
                 {
                     data: 'action',
                     name: 'action',

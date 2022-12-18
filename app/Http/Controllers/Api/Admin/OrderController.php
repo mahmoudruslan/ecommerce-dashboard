@@ -10,7 +10,7 @@ use App\Models\Product;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -43,7 +43,7 @@ class OrderController extends Controller
                 }
                 $order = Order::Create([ //create order
                     'customer_id' => $customer->id,
-                    'status' => '0',
+                    'status' => '3',
                     'notes' => $request->notes,
                     'price' => $price
                 ]);
@@ -61,7 +61,7 @@ class OrderController extends Controller
                     ]);
                 }
                 $cart->delete();
-                return $this->returnSuccess('200', __('Created Successfully'));
+                return $this->returnData('order_id',$order->id , __('Created Successfully'));
             }
             return $this->returnError('201', __('Cart not found'));
         } catch (\Exception $e) {
@@ -69,12 +69,18 @@ class OrderController extends Controller
         }
     }
 
-    public function delete($id)
+    public function cancel($id)
     {
         try {
-            $order = Order::findOrFail($id);
-            $order->delete();
-            return $this->returnSuccess('200', __('Deleted Successfully'));
+            $order = DB::table('orders')->find($id);
+            if($order->status == '3' || $order->status == '1')
+            {
+                $order = DB::table('orders')->where('id', $id)->update([
+                    'status' => '1'
+                ]);
+                return $this->returnSuccess('200', __('Canceled Successfully'));
+            }
+            return $this->returnError('201', __('The order cannot be cancelled'));
         } catch (\Exception $e) {
             return $this->returnError('404', 'not found');
         }

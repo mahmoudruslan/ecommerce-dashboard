@@ -40,8 +40,9 @@
             <option value="0">{{ __('Acceptance') }}</option>
             <option value="1">{{ __('Rejection') }}</option>
             <option value="2">{{ __('To fail') }}</option>
-            <option value="3">{{ __('Delivery') }}</option>
-            <option value="4">{{ __('Successfully delivered') }}</option>
+            <option value="3">{{ __('Pending') }}</option>
+            <option value="4">{{ __('Delivery') }}</option>
+            <option value="5">{{ __('Successfully delivered') }}</option>
         </select>
         <button type="submit" class="btn btn-primary btn-user btn-block">
             {{ __('Submit') }}
