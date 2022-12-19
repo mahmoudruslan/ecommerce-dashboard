@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Notifications\AccountStatusNotification;
 use Illuminate\Http\Request;
 use App\Traits\HtmlTrait;
 use DataTables;
@@ -37,6 +38,7 @@ class CustomerController extends Controller
         $customer->update([
             'status' => 'active'
         ]);
+        $customer->notify(new AccountStatusNotification());
         return redirect()->back();
     }
 }
