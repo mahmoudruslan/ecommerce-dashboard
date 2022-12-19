@@ -2,12 +2,11 @@
 
 namespace App\Notifications;
 
-use App\Models\Order;
+use App\Models\Customer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
 use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
 use NotificationChannels\Fcm\Resources\AndroidConfig;
@@ -16,7 +15,7 @@ use NotificationChannels\Fcm\Resources\AndroidNotification;
 use NotificationChannels\Fcm\Resources\ApnsConfig;
 use NotificationChannels\Fcm\Resources\ApnsFcmOptions;
 
-class StatusOrderNotification extends Notification
+class AccountStatusNotification extends Notification
 {
     use Queueable;
 
@@ -25,10 +24,10 @@ class StatusOrderNotification extends Notification
      *
      * @return void
      */
-    private $order;
-    public function __construct(Order $order)
+    //private $customer;
+    public function __construct()
     {
-        return $this->order = $order;
+        //return $this->customer = $customer;
     }
 
 
@@ -37,7 +36,6 @@ class StatusOrderNotification extends Notification
         return [FcmChannel::class];
     }
 
-
     public function toFcm($notifiable)
     {
         return FcmMessage::create()
@@ -45,8 +43,8 @@ class StatusOrderNotification extends Notification
             //     'order_status' => 'true'
             // ])
             ->setNotification(\NotificationChannels\Fcm\Resources\Notification::create()
-                ->setTitle('حالة الطلب')
-                ->setBody('تم تغير حالة الطلب إلي' . ' : ' . $this->order->status .'')
+                ->setTitle('طلب التسجيل')
+                ->setBody('تمت الموافقة علي حسابك من قبل المشرفين')
                 ->setImage('http://example.com/url-to-image-here.png'))
             ->setAndroid(
                 AndroidConfig::create()
@@ -58,12 +56,6 @@ class StatusOrderNotification extends Notification
     }
 
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray($notifiable)
     {
         return [
