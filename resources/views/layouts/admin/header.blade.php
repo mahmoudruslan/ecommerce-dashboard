@@ -33,59 +33,7 @@
                                 </form>
                             </div>
                         </li>
-                        <form id="form" action="" method="">
-                            @csrf
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <input type="hidden" name="id" id="message_id"
-                                    value="{{ $last_message_id ?? '' }}">
-                                <a id="save" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    @if ($last_message_id > $last_seen_message_id)
-                                        <span id="span"
-                                            class="badge badge-danger badge-counter">{{ $viewed_message_number }}</span>
-                                    @endif
-
-                                </a>
-                                <!-- Dropdown - Alerts -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-left shadow animated--grow-in"
-                                    aria-labelledby="alertsDropdown">
-                                    <h6 class="dropdown-header">
-                                        {{ __('Notifications') }}
-                                    </h6>
-                                    @if (isset($messages))
-                                        @forelse ($messages as $message)
-                                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                                <div class="mr-3">
-                                                    <div class="icon-circle bg-warning">
-                                                        <i class="fas fa-exclamation-triangle text-white"></i>
-                                                    </div>
-                                                </div>
-                                                <div style="overflow-wrap: anywhere;">
-                                                    <div class="small text-gray-500">{{ $message->created_at }}</div>
-                                                    <span class="font-weight-bold">{{ __($message->content) }}
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        @empty
-                                            <h6 class="text-gray-500 text-center mt-3">
-                                                {{ __('There are no notifications') }}
-                                            </h6>
-                                        @endforelse
-                                        @if (count($messages) > 7)
-                                            <a style="text-decoration: none;text-align: center"
-                                                class="dropdown-item align-items-center"
-                                                href="{{ route('admin.messages.index') }}">
-                                                <h6 class="text-gray-500">
-                                                    {{ __('View All') }}
-                                                </h6>
-                                            </a>
-                                        @endif
-                                    @endif
-                                </div>
-                            </li>
-                        </form>
+                        {{-- notifications --}}
                         <li class="nav-item dropdown no-arrow mx-1">
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">

@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Message;
 use App\Models\Order;
-use App\Models\ViewedMessage;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
@@ -22,30 +20,6 @@ class ViewServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        //management notifications
-        view()->composer('layouts.admin.header', function ($view) {
-            $messages = Message::take(7)->get();
-            $user_id = Auth::user()->id;
-
-            $last_message = Message::latest()->first();
-            $last_message_id = $last_message == true ? $last_message->id : '0';
-            $last_seen_message = ViewedMessage::where('user_id', $user_id)->latest()->first();
-
-            $last_seen_message_id = $last_seen_message == true ? $last_seen_message->message_id : '0';
-
-            $viewed_message_number = $last_message_id - $last_seen_message_id;
-            if($last_seen_message_id == 0){
-                $viewed_message_number = count($messages);
-            }
-
-            $view->with([
-                'messages' =>  $messages,
-                'last_message_id' =>  $last_message_id,
-                'last_seen_message_id' =>  $last_seen_message_id,
-                'viewed_message_number' =>  $viewed_message_number,
-            ]);
-        });
-
         //management order percentage
         view()->composer('admin.dashboard', function ($view) {
             $order_count = count(Order::get());
