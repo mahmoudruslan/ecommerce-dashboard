@@ -25,17 +25,17 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');;
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::get('categories', [CategoryController::class, 'index']);
+Route::get('inner_categories/{category_id}', [CategoryController::class, 'show']);
+Route::get('inner_category/products/{inner_category_id}', [InnerCategoryController::class, 'show']);
+Route::get('product/types/{id}', [ProductController::class, 'show']); 
+Route::get('ads', [AdController::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('profile/update/{id}', [CustomerController::class, 'update']);
     Route::get('active/account', [AuthController::class, 'activeAccount']);
-    Route::get('categories', [CategoryController::class, 'index']);
-    Route::get('inner_categories/{category_id}', [CategoryController::class, 'show']);
-    Route::get('inner_category/products/{inner_category_id}', [InnerCategoryController::class, 'show']);
     Route::get('products', [ProductController::class, 'index']);
-    Route::get('product/types/{id}', [ProductController::class, 'show']); 
     Route::post('order/store', [OrderController::class, 'store']);
     Route::get('customer/orders', [OrderController::class, 'show']);
     Route::delete('order/cancel/{order_id}', [OrderController::class, 'cancel']);
@@ -45,7 +45,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('delete/cart', [CartController::class, 'deleteCart']);
     Route::post('increase', [CartController::class, 'increase']);
     Route::post('decrease', [CartController::class, 'decrease']);
-    Route::get('ads', [AdController::class, 'index']);
-
-    
 });
