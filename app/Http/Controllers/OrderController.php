@@ -20,9 +20,8 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         try {
-
             if ($request->ajax()) {
-                $order = Order::get();
+                $order = Order::orderBy('id', 'DESC')->get();
                 return DataTables::of($order)
                     ->addIndexColumn()
                     ->addColumn('username', function ($row) {

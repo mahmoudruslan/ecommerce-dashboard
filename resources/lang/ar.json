@@ -204,6 +204,11 @@
     "Enter Link":"أدخل الرابط",
     "Ad Details":"تفاصيل الإعلان",
     "There is no data to display":"لا يوجد بيانات لعرضها",
-    "Pending":"قيد الانتظار"
+    "Pending":"قيد الانتظار",
+    "Active":"تفعيل",
+    "Not active":"إلغاء التفعيل",
+    "Customers":"العملاء",
+    "Order Products":"منتجات الطلب",
+    "Unit":"الوحدة"
 
 }

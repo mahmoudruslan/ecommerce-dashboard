@@ -42,7 +42,11 @@ Route::group(
     ],
     function () {
         Route::get('customers/documentation', [CustomerController::class, 'allUnverifiedAccounts'])->name('customers.documentation');
-        Route::get('customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+
+        Route::post('customers/active/{id}', [CustomerController::class, 'active'])->name('customer.active');
+        Route::post('customers/not-active/{id}', [CustomerController::class, 'notActive'])->name('customer.not.active');
+        Route::resource('customers', CustomerController::class);
+
 
 
         Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {

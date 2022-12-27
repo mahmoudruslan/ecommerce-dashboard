@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['first_appearing', 'name_en','name_ar',  'details_ar',  'details_en', 'amount', 'photo', 'price', 'discount_price', 'inner_category_id', 'product_id'];
+    protected $fillable = ['first_appearing', 'name_en','name_ar',  'details_ar',  'details_en', 'amount', 'photo', 'price', 'unit', 'discount_price', 'inner_category_id', 'product_id'];
     protected $appends = ['name', 'details'];
 
     public $timestamps = true;
@@ -61,6 +61,10 @@ class Product extends Model
     public function getDetailsAttribute()
     {
         return $this->details_ar;
+    }
+    public function getPriceAttribute($value)
+    {
+        return $this->discount_price ?? $value;
     }
 
 }

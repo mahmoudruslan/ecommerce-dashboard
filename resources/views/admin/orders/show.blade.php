@@ -68,7 +68,7 @@
                             <th class="text-center">{{ __('Name') }}</th>
                             <th class="text-center">{{ __('Quantity') }}</th>
                             <th class="text-center">{{ __('Price') }}</th>
-                            <th class="text-center">{{ __('Discount Price') }}</th>
+                            {{-- <th class="text-center">{{ __('Discount Price') }}</th> --}}
                             <th class="text-center w-25">{{ __('Details') }}</th>
                             <th class="text-center">{{ __('Amount') }}</th>
                         </tr>
@@ -80,7 +80,7 @@
                             <td>{{$product->name}}</td>
                             <td>{{$order->productDetails[$key]->quantity}}</td>
                             <td>{{$product->price}}</td>
-                            <td>{{$product->discount_price}}</td>
+                            {{-- <td>{{$product->discount_price}}</td> --}}
                             <td>{{$product->details}}</td>
                             <td>{{$product->amount}}</td>
                         </tr>

@@ -28,6 +28,7 @@ class CartController extends Controller
                     $row->amount = $product->amount;
                     $row->photo = $product->photo;
                     $row->price = $product->price;
+                    $row->unit = $product->unit;
                     $row->inner_category_id = $product->inner_category_id;
 
                     return $row;
@@ -46,7 +47,10 @@ class CartController extends Controller
             $cart = Cart::updateOrCreate([
                 'customer_id' => Auth::guard('sanctum')->user()->id
             ]);
-            $product = $cart->products->where('cart_id', $cart->id)->where('product_id', $request->product_id)->first();
+            $product = $cart->products
+            ->where('cart_id', $cart->id)
+            ->where('product_id', $request->product_id)
+            ->first();
             if(empty($product)){
                 CartProduct::Create([
                     'cart_id' => $cart->id,
