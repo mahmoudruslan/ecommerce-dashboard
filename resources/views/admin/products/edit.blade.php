@@ -39,7 +39,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <label  style="font-size: 12px;margin-right: 13px">{{ __('Enter Name_ar') }}</label>
+                    <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Name_ar') }}</label>
                     <input value="{{ $product->name_ar }}" type="text" class="form-control form-control-user"
                         id="exampleFirstName" placeholder="{{ __('Enter Name_ar') }}" name="name_ar">
                     @error('name_ar')
@@ -49,7 +49,7 @@
                     @enderror
                 </div>
                 <div class="col-sm-6">
-                    <label  style="font-size: 12px;margin-right: 13px">{{ __('Enter Name_en') }}</label>
+                    <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Name_en') }}</label>
                     <input value="{{ $product->name_en }}" type="text" class="form-control form-control-user"
                         id="name_en" placeholder="{{ __('Enter Name_en') }}" name="name_en">
                     @error('name_en')
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label  style="font-size: 12px;margin-right: 13px">{{ __('Enter Details_ar') }}</label>
+                <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Details_ar') }}</label>
                 <input value="{{ $product->details_ar }}" type="text" class="form-control form-control-user"
                     id="exampleinput" placeholder="{{ __('Enter Details_ar') }}" name="details_ar">
                 @error('details_ar')
@@ -70,8 +70,9 @@
                 @enderror
             </div>
 
-            <div class="form-group">
-                <label  style="font-size: 12px;margin-right: 13px">{{ __('Enter Details_en') }}</label>
+            <div class="form-group row">
+                <div class="col md 6">
+                    <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Details_en') }}</label>
                     <input value="{{ $product->details_en }}" type="text" class="form-control form-control-user"
                         id="exampleFirstName" placeholder="{{ __('Enter Details_en') }}" name="details_en">
                     @error('details_en')
@@ -79,10 +80,23 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                </div>
+                <div class="col md 6">
+                    <label style="font-size: 12px;margin-right: 13px">{{ __('Unit') }}</label>
+                    <input value="{{ $product->unit }}" type="text" class="form-control form-control-user"
+                        id="exampleFirstName" placeholder="ربطة" name="unit">
+                    @error('unit')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
             </div>
             <div class="form-group">
-                <label  style="font-size: 12px;margin-right: 13px">{{ __('Enter Discount Rate') }}</label>
-                <input value="{{$product->discount_rate == 100 .'%' ? null : $product->discount_rate}}" type="number" class="form-control form-control-user" id="discount_price"
+                <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Discount Rate') }}</label>
+                <input value="{{ $product->discount_rate == 100 . '%' ? null : $product->discount_rate }}"
+                    type="number" class="form-control form-control-user" id="discount_price"
                     placeholder="{{ __('Enter Discount Rate') }} (%)" name="discount_price">
                 @error('discount_price')
                     <span class="text-danger" role="alert">
@@ -92,7 +106,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <label  style="font-size: 12px;margin-right: 13px">{{ __('Enter Amount') }}</label>
+                    <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Amount') }}</label>
                     <input value="{{ $product->amount }}" type="text" class="form-control form-control-user"
                         id="exampleinput" placeholder="{{ __('Enter Amount') }}" name="amount">
                     @error('amount')
@@ -102,7 +116,7 @@
                     @enderror
                 </div>
                 <div class="col-sm-6">
-                    <label  style="font-size: 12px;margin-right: 13px">{{ __('Enter Price') }}</label>
+                    <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Price') }}</label>
                     <input value="{{ $product->price }}" type="text" class="form-control form-control-user"
                         id="price" placeholder="{{ __('Enter Price') }}" name="price">
                     @error('price')
@@ -113,13 +127,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label  style="font-size: 12px;margin-right: 13px">{{ __('Enter who appears first') }}</label>
+                <label style="font-size: 12px;margin-right: 13px">{{ __('Enter who appears first') }}</label>
                 <input value="{{ $product->price }}" type="number" class="form-control form-control-user"
-                        id="first_appearing" placeholder="{{ __('Enter who appears first') }}" name="first_appearing">
+                    id="first_appearing" placeholder="{{ __('Enter who appears first') }}" name="first_appearing">
             </div>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <label  style="font-size: 12px;margin-right: 13px">{{ __($product->category['name_' . app()->getLocale()]) }}</label>
+                    <label
+                        style="font-size: 12px;margin-right: 13px">{{ __($product->category['name_' . app()->getLocale()]) }}</label>
                     <select name="inner_category_id"
                         class="custom-select form-control @error('inner_category_id') is-invalid @enderror">
                         <option value="{{ $product->category->id }}" selected>
@@ -132,7 +147,7 @@
                     </select>
                 </div>
                 <div class="col-sm-6">
-                    <label  style="font-size: 12px;margin-right: 13px">{{__('Enter Photo')}}</label>
+                    <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Photo') }}</label>
                     <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
                 </div>
             </div>
@@ -152,7 +167,8 @@
             </button>
         </form><br>
         @if (count($product->products) > 0)
-            <a href="{{ route('admin.product_types.show', $product->id) }}" class="btn btn-primary btn-user btn-block">
+            <a href="{{ route('admin.product_types.show', $product->id) }}"
+                class="btn btn-primary btn-user btn-block">
                 {{ __('Product Types') }}
             </a>
         @endif

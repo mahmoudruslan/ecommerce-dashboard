@@ -80,6 +80,7 @@ class ProductController extends Controller
                 'amount' => $request->amount,
                 'photo' => $photo,
                 'price' => $request->price,
+                'unit' => $request->unit,
                 'discount_price' => $request->discount_price,
                 'inner_category_id' => $request->inner_category_id,
                 'product_id' => $request->product_id ?? null,
@@ -133,6 +134,7 @@ class ProductController extends Controller
                 'amount' => $request->amount,
                 'photo' => $photo ?? $product->photo,
                 'price' => $request->price,
+                'unit' => $request->unit,
                 'discount_price' => $request->discount_price,
                 'inner_category_id' => $request->inner_category_id,
             ]);

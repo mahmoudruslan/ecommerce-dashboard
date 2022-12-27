@@ -35,11 +35,7 @@ class OrderController extends Controller
                 $cart_products = $cart->products;
                 foreach ($cart_products as $item) {
                     $product = Product::find($item['product_id']);
-                    if ($product->discount_price == null) {
-                        $price += $product->price * $item['quantity'];
-                    } else {
-                        $price += $product->discount_price * $item['quantity'];
-                    }
+                    $price += $product->price * $item['quantity'];
                 }
                 $order = Order::Create([ //create order
                     'customer_id' => $customer->id,
@@ -55,9 +51,9 @@ class OrderController extends Controller
                         'order_id' => $order->id,
                         'product_id' => $product->id,
                         'name' => $product->name_ar,
-                        'price' => $product->discount_price ?? $product->price,
+                        'price' => $product->price,
                         'quantity' => $item['quantity'],
-                        'total' => $product->discount_price != null ? $product->discount_price * $item['quantity'] : $product->price * $item['quantity'],
+                        'total' => $product->price * $item['quantity'],
                     ]);
                 }
                 $cart->delete();

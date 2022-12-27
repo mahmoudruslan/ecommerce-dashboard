@@ -6,20 +6,31 @@ trait HtmlTrait
 
     public function href($route, $name)
     {
-        return '<a class="btn btn-secondary"
+        return '<a class="btn btn-secondary mb-1"
         href="'. $route .'">
         '. __($name) .'
     </a>';
     }
-    public function h_edit($route){
+    public function update($route, $text, $color){
+        return '<form method="POST" action="'.$route.'">
+        <input type="hidden" name="_token" value="'. csrf_token()  .'" /> 
+        <button type="submit" class="btn btn-'.$color.' mb-1">
+            '. $text . '
+        </button>
+    </form>';
+    }
+
+        public function h_edit($route){
         return '<a class="btn btn-info btn-circle" href="' . $route . '">
         <i class="fas fa-edit"></i></a>';
     }
 
-    public function h_delete($row){
-        return '<a class="btn btn-danger btn-circle" href="#"
+    public function h_delete($row, $text ='<i class="fas fa-trash"></i>'){
+        $c = '';
+        if($text == '<i class="fas fa-trash"></i>') $c = 'btn-circle';
+        return '<a class="btn btn-danger '. $c .'" href="#"
         data-toggle="modal"data-target="#deletemodel'.$row->id.'">
-        <i class="fas fa-trash"></i>
+        '. $text .'
     </a>';
     }
 

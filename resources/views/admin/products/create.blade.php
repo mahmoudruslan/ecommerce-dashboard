@@ -52,10 +52,20 @@
                 </div>
                 <div class="form-group row">
                     
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="exampleinput"
                         placeholder="{{ __('Enter Details_ar') }}" name="details_ar">
                     @error('details_ar')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="exampleinput"
+                        placeholder="{{__('Unit')}}" name="unit">
+                    @error('unit')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

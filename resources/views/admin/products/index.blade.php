@@ -36,7 +36,7 @@
                                 <th class="text-center">{{ __('#') }}</th>
                                 <th class="text-center">{{ __('Name') }}</th>
                                 <th class="text-center">{{ __('Price') }}</th>
-                                <th class="text-center">{{ __('Discount Price') }}</th>
+                                {{-- <th class="text-center">{{ __('Discount Price') }}</th> --}}
                                 <th class="text-center w-25">{{ __('Details') }}</th>
                                 <th class="text-center">{{ __('Amount') }}</th>
                                 <th class="text-center">{{ __('Actions') }}</th>
@@ -71,10 +71,10 @@
                     data: 'price',
                     name: 'price'
                 },
-                {
-                    data: 'discount_price',
-                    name: 'discount_price'
-                },
+                // {
+                //     data: 'discount_price',
+                //     name: 'discount_price'
+                // },
                 {
                     data: 'details_' + lang,
                     name: 'details_' + lang
