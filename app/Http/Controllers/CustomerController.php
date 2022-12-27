@@ -87,6 +87,7 @@ class CustomerController extends Controller
         $customer->update([
             'status' => 'not active'
         ]);
+
         return redirect()->back();
     }
 }
