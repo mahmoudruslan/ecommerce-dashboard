@@ -7,7 +7,6 @@ use App\Models\InnerCategory;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Traits\HtmlTrait;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Traits\SaveImageTrait;
 use DataTables;
 
@@ -20,7 +19,7 @@ class ProductController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $product = Product::orderBy('first_appearing', 'DESC')->get();
+                $product = Product::whereNull('product_id')->orderBy('first_appearing', 'DESC')->get();
                 return DataTables::of($product)
                     ->addIndexColumn()
                     ->editColumn('discount_price', function($row){
@@ -35,7 +34,7 @@ class ProductController extends Controller
                         $btn = $btn . ' ' . $this->modal($row, route('admin.products.destroy', $row->id));
                         $btn = $btn . ' ' . $this->h_show(route('admin.products.show', $row->id));
                         $btn = $btn . ' ' . $this->h_edit(route('admin.products.edit', $row->id));
-                        $btn = $btn . ' ' . $this->href(route('admin.product_types.show', $row->id), 'Types');
+                        $btn = $btn . ' ' . $this->href(route('admin.product_types.all', $row->id), 'Types');
                         return $btn;
                     })
                     ->rawColumns(['action'])
@@ -51,11 +50,7 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         try {
-            $categories = InnerCategory::select(
-                'id',
-                'name_ar',
-                'name_en',
-            )->get();
+            $categories = InnerCategory::select('id','name_ar','name_en')->get();
 
             if (isset($request->product_id)) {
                 $product = Product::find($request->product_id);
@@ -75,15 +70,15 @@ class ProductController extends Controller
             $product = Product::create([
                 'name_ar' => $request->name_ar,
                 'name_en' => $request->name_en,
-                'details_ar' => $request->details_ar,
-                'details_en' => $request->details_en,
-                'amount' => $request->amount,
+                'details_ar' => $request->details_ar ?? '---',
+                'details_en' => $request->details_en ?? '---',
+                'amount' => $request->amount ?? '---',
                 'photo' => $photo,
-                'price' => $request->price,
-                'unit' => $request->unit,
+                'price' => $request->price ?? '---',
+                'unit' => $request->unit ?? '---',
                 'discount_price' => $request->discount_price,
                 'inner_category_id' => $request->inner_category_id,
-                'product_id' => $request->product_id ?? null,
+                'product_id' => null,
             ]);
             $product->update([
                 'first_appearing' => $product->id,
@@ -126,16 +121,16 @@ class ProductController extends Controller
             $photo = $this->saveImage('products', $request->photo);
             $product = Product::findOrFail($id);
             $product->update([
-                'first_appearing' => $request->first_appearing ?? $product->first_appearing,
+                // 'first_appearing' => $request->first_appearing ?? $product->first_appearing,
                 'name_ar' => $request->name_ar,
                 'name_en' => $request->name_en,
                 'details_ar' => $request->details_ar,
                 'details_en' => $request->details_en,
-                'amount' => $request->amount,
+                // 'amount' => $request->amount,
                 'photo' => $photo ?? $product->photo,
-                'price' => $request->price,
-                'unit' => $request->unit,
-                'discount_price' => $request->discount_price,
+                // 'price' => $request->price,
+                // 'unit' => $request->unit,
+                // 'discount_price' => $request->discount_price,
                 'inner_category_id' => $request->inner_category_id,
             ]);
             return redirect()->back()->with(['success' => 'Updated Successfully']);

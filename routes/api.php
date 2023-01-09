@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Admin\InnerCategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\CustomerController;
+use App\Http\Controllers\api\admin\governorateController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,6 +41,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('customer/orders', [OrderController::class, 'show']);
     Route::delete('order/cancel/{order_id}', [OrderController::class, 'cancel']);
     Route::get('cart', [CartController::class, 'index']);
+    Route::get('governorates', [GovernorateController::class, 'index']);
     Route::post('add-to-cart', [CartController::class, 'store']);
     Route::post('delete/product/cart', [CartController::class, 'deleteProduct']);
     Route::post('delete/cart', [CartController::class, 'deleteCart']);

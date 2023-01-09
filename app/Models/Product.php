@@ -40,19 +40,27 @@ class Product extends Model
     public function setDiscountPriceAttribute($value)
     {
         if($value != null && $value > 0){
-            $value = str_replace("%","",$value);
-            $discount_price = $this->attributes['price'] * $value / 100;
-            $this->attributes['discount_price'] = $this->attributes['price'] - $discount_price;
+            $percentage = str_replace("","%",$value);
+            $discount_price = $this->attributes['price'] * $percentage / 100;
+            $this->attributes['discount_price'] = round($this->attributes['price'] - $discount_price, 2);
+        }else{
+            $this->attributes['discount_price'] = null;
         }
+}
 
+    public function setPriceAttribute($value)
+    {
+            $this->attributes['price'] = round($value, 2);
     }
 
     public function getDiscountRateAttribute()
     {
+        if($this->attributes['discount_price'] != null && $this->attributes['discount_price'] > 0){
         $discount = $this->attributes['price'] - $this->attributes['discount_price'];
         $discount_rate = $discount / $this->attributes['price'];
         return round((float)$discount_rate * 100);
     }
+}
 
     public function getNameAttribute()
     {

@@ -197,6 +197,7 @@
     "Canceled Successfully":"تم الإلغاء بنجتح",
     "The order cannot be cancelled":"لا يمكن إلغاء الطلب",
     "Ad photo":"صورة الإعلان",
+    "Photo":"الصورة",
     "Ads":"الإعلانات",
     "Add ads":"إضافة إعلانات",
     "Link":"الرابط",
@@ -209,6 +210,8 @@
     "Not active":"إلغاء التفعيل",
     "Customers":"العملاء",
     "Order Products":"منتجات الطلب",
-    "Unit":"الوحدة"
+    "Unit":"الوحدة",
+    "The higher the number, the higher the priority":"كلما زاد الرقم زادت أولوية الظهور",
+    "price before discount":"السعر قبل الخصم"
 
 }

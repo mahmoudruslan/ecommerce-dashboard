@@ -42,6 +42,10 @@ Route::group(
     ],
     function () {
         Route::get('customers/documentation', [CustomerController::class, 'allUnverifiedAccounts'])->name('customers.documentation');
+        Route::get('test', function() {
+            return config('governorates');
+
+        });
 
         Route::post('customers/active/{id}', [CustomerController::class, 'active'])->name('customer.active');
         Route::post('customers/not-active/{id}', [CustomerController::class, 'notActive'])->name('customer.not.active');
@@ -57,6 +61,7 @@ Route::group(
             Route::resource('inner_categories', InnerCategoryController::class);
             Route::resource('products', ProductController::class);
             Route::resource('product_types', ProductTypeController::class);
+            Route::get('product_types/all/{product_id}', [ProductTypeController::class, 'all'])->name('product_types.all');
             Route::resource('orders', OrderController::class);
             Route::resource('notifications', NotificationController::class);
             Route::resource('messages', MessageController::class);

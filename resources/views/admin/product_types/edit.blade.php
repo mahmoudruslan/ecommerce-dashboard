@@ -13,11 +13,11 @@
 <!-- Nested Row within Card Body -->
 <div class="row">
     <div class="p-5  col-lg-6">
-        <a style="margin-left: 20px" href="{{ route('admin.products.index') }}" class="btn btn-secondary btn-icon-split">
+        <a style="margin-left: 20px" href="{{ route('admin.product_types.all', $product->product_id) }}" class="btn btn-secondary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-right"></i>
             </span>
-            <span class="text">{{ __('Products') }}</span>
+            <span class="text">{{ __('Types') }}</span>
         </a><br><br>
         @if (Session::has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -31,7 +31,7 @@
         <div class="text-center">
             <h1 class="h4 text-gray-900 mb-4">{{ __('Edit Data') }}</h1>
         </div>
-        <form class="user" method="POST" action="{{ route('admin.products.update', $product->id) }}"
+        <form class="user" method="POST" action="{{ route('admin.product_types.update', $product->id) }}"
             enctype="multipart/form-data">
             @csrf
             @method('patch')
@@ -81,7 +81,7 @@
                         </span>
                     @enderror
                 </div>
-                {{-- <div class="col md 6">
+                <div class="col md 6">
                     <label style="font-size: 12px;margin-right: 13px">{{ __('Unit') }}</label>
                     <input value="{{ $product->unit }}" type="text" class="form-control form-control-user"
                         id="exampleFirstName" placeholder="ربطة" name="unit">
@@ -90,10 +90,10 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                </div> --}}
+                </div>
 
             </div>
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Discount Rate') }}</label>
                 <input value="{{ $product->discount_rate == 100 . '%' ? null : $product->discount_rate }}"
                     type="number" class="form-control form-control-user" id="discount_price"
@@ -103,8 +103,8 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-            </div> --}}
-            {{-- <div class="form-group row">
+            </div>
+            <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Amount') }}</label>
                     <input value="{{ $product->amount }}" type="text" class="form-control form-control-user"
@@ -116,8 +116,8 @@
                     @enderror
                 </div>
                 <div class="col-sm-6">
-                    <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Price') }}</label>
-                    <input value="{{ $product->price }}" type="text" class="form-control form-control-user"
+                    <label style="font-size: 12px;margin-right: 13px">{{ __('price before discount') }}</label>
+                    <input value="{{ \DB::table('products')->find($product->id)->price}}" type="text" class="form-control form-control-user"
                         id="price" placeholder="{{ __('Enter Price') }}" name="price">
                     @error('price')
                         <span class="text-danger" role="alert">
@@ -125,16 +125,16 @@
                         </span>
                     @enderror
                 </div>
-            </div> --}}
-            {{-- <div class="form-group">
-                <label style="font-size: 12px;margin-right: 13px">{{ __('Enter who appears first') }}</label>
-                <input value="{{ $product->price }}" type="number" class="form-control form-control-user"
+            </div>
+            <div class="form-group">
+                <label style="font-size: 12px;margin-right: 13px">{{ __('Enter who appears first') }} :- ({{__('The higher the number, the higher the priority')}})</label>
+                <input value="{{ $product->first_appearing }}" type="number" class="form-control form-control-user"
                     id="first_appearing" placeholder="{{ __('Enter who appears first') }}" name="first_appearing">
-            </div> --}}
+            </div>
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <label
-                        style="font-size: 12px;margin-right: 13px">{{ __('Inner Category') }}</label>
+                        style="font-size: 12px;margin-right: 13px">{{ __('Category') }}</label>
                     <select name="inner_category_id"
                         class="custom-select form-control @error('inner_category_id') is-invalid @enderror">
                         <option value="{{ $product->category->id }}" selected>
@@ -157,7 +157,7 @@
         </form>
         <hr>
         @if ($product->product_id == null)
-        <form class="insubmit" method="GET" action="{{ route('admin.product_types.create') }}">
+        <form class="insubmit" method="GET" action="{{ route('admin.products.create') }}">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -169,7 +169,7 @@
         </form><br>
         
         @if (count($product->products) > 0)
-            <a href="{{ route('admin.product_types.all', $product->id) }}"
+            <a href="{{ route('admin.product_types.show', $product->id) }}"
                 class="btn btn-primary btn-user btn-block">
                 {{ __('Product Types') }}
             </a>

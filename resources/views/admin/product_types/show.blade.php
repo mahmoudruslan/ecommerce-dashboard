@@ -1,98 +1,64 @@
 @extends('layouts.admin.master')
 @section('title')
-    {{ __('Product Types') }}
+    {{ __('Details Product') }}
+@endsection
+@section('style')
+    <style>
+        .pt-10 {
+            padding-top: 3rem;
+        }
+    </style>
 @endsection
 @section('content')
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+        <div class="p-5  col-lg-6">
+            <a style="margin-left: 20px" href="{{ route('admin.product_types.all', $product->product_id) }}" class="btn btn-secondary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-right"></i>
+                </span>
+                <span class="text">{{ __('Types') }}</span>
+            </a>
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">{{ __('Details Product') }}</h1>
+            </div>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ __('Name') }}</th>
+                        <td>{{ $product['name_' . app()->getLocale()] }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ __('Category') }}</th>
+                        <td>{{ $product->category['name_' . app()->getLocale()] }}</td>
+                    </tr>
 
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">{{ __('Product Types') }}</h1>
-        <p class="mb-4"></p>
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            @if (Session::has('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ __(Session::get('success')) }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-            @if (Session::has('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ __(Session::get('error')) }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-            <div class="card-body">
-                <input type="hidden" id="lang" value="{{ app()->getLocale() }}">
-                <div class="table-responsive">
-                    <table class="table table-bordered text-center yajra-datatable" id="dataTable" width="100%"
-                        cellspacing="0">
-                        <div class="my-2"></div>
-                        <form method="GET" action="{{ route('admin.products.create') }}">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <button type="submit" class="btn btn-success btn-icon-split">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                                <span class="text">{{ __('Add Product Types') }}</span>
-                            </button>
-                        </form>
-                        <br>
-                        <div class="my-4"></div>
-                        <thead>
-                            <tr>
-                                <th class="text-center">{{ __('#') }}</th>
-                                <th class="text-center">{{ __('Name') }}</th>
-                                <th class="text-center">{{ __('Price') }}</th>
-                                <th class="text-center">{{ __('Discount Price') }}</th>
-                                <th class="text-center w-25">{{ __('Details') }}</th>
-                                <th class="text-center">{{ __('Amount') }}</th>
-                                <th class="text-center">{{ __('Actions') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($product_types as $product_type)
-                                <tr>
-                                    <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $product_type['name_' . app()->getLocale()] }}</td>
-                                    <td>{{ $product_type->price }}</td>
-                                    <td>{{ $product_type->discount_price ?? __('without discount') }}</td>
-                                    <td>{{ $product_type['details_' . app()->getLocale()] }}</td>
-                                    <td>{{ $product_type->amount }}</td>
-                                    <td>
-
-                                        <a class="btn btn-info btn-circle"
-                                            href="{{ route('admin.products.edit', $product_type->id) }}">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-warning btn-circle"
-                                            href="{{ route('admin.products.show', $product_type->id) }}">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a class="btn btn-danger btn-circle" href="#"
-                                            data-toggle="modal"data-target="#deletemodel{{ $product_type->id }}">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                        
-                                        <a class="btn btn-secondary"
-                                            href="{{ route('admin.product_types.show', $product_type->id) }}">
-                                            {{ __('Types') }}
-                                        </a>
-                                    </td>
-                                </tr>
-                                @include('admin.product_types.delete')
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                    <tr>
+                        <th scope="row">{{ __('Price') }}</th>
+                        <td>{{ $product->price }}</td>
+                    </tr>
+                    {{-- <tr>
+                        <th scope="row">{{ __('Discount Price') }}</th>
+                        <td>{{$product->discount_price}}</td>
+                    </tr> --}}
+                    <tr>
+                        <th scope="row">{{ __('Amount') }}</th>
+                        <td>{{ $product->amount }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ __('First Appearing') }}</th>
+                        <td>{{ $product->first_appearing }}</td>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: inherit;" scope="row">{{ __('Details') }}</th>
+                        <td>{{ $product['details_' . app()->getLocale()] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-responsive">
             </div>
         </div>
+        <div class="col-lg-5 pt-10 p-4"><img style="width: 90%; max-height: 90%;"
+                src="{{ asset('images/products/' . $product->photo) }}"></div>
     </div>
 @endsection

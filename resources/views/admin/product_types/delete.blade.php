@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">{{__ ("Close")}}</button>
-                <form id="logout-form" action="{{route('admin.products.destroy', $product_type->id)}}" method="POST">
+                <form id="logout-form" action="{{route('admin.product_types.destroy', $product_type->id)}}" method="POST">
                     @csrf
                     {{method_field("Delete")}}
                     <button type="submit" class="btn btn-danger">{{__("Delete")}}</button>

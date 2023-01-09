@@ -25,25 +25,26 @@
             <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <th scope="row">{{ __('Category') }}</th>
-                        <td>{{ $product->category['name_' . app()->getLocale()] }}</td>
-                    </tr>
-                    <tr>
                         <th scope="row">{{ __('Name') }}</th>
                         <td>{{ $product['name_' . app()->getLocale()] }}</td>
                     </tr>
                     <tr>
+                        <th scope="row">{{ __('Category') }}</th>
+                        <td>{{ $product->category['name_' . app()->getLocale()] }}</td>
+                    </tr>
+
+                    {{-- <tr>
                         <th scope="row">{{ __('Price') }}</th>
                         <td>{{ $product->price }}</td>
-                    </tr>
-                    <tr>
+                    </tr> --}}
+                    {{-- <tr>
                         <th scope="row">{{ __('Discount Price') }}</th>
                         <td>{{$product->discount_price}}</td>
-                    </tr>
-                    <tr>
+                    </tr> --}}
+                    {{-- <tr>
                         <th scope="row">{{ __('Amount') }}</th>
                         <td>{{ $product->amount }}</td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th style="vertical-align: inherit;" scope="row">{{ __('Details') }}</th>
                         <td>{{ $product['details_' . app()->getLocale()] }}</td>
