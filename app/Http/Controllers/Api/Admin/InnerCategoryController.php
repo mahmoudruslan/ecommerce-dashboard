@@ -31,6 +31,7 @@ class InnerCategoryController extends Controller
             }])
             
             ->get(['id', 'name_ar', 'details_ar', 'photo', 'price', 'unit', 'discount_price', 'product_id', 'amount','inner_category_id']);
+
             if (!$products) {
                 return $this->returnError('404', 'categories not found');
             }

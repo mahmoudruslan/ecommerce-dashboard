@@ -211,7 +211,10 @@
     "Customers":"العملاء",
     "Order Products":"منتجات الطلب",
     "Unit":"الوحدة",
+
     "The higher the number, the higher the priority":"كلما زاد الرقم زادت أولوية الظهور",
-    "price before discount":"السعر قبل الخصم"
+    "price before discount":"السعر قبل الخصم",
+    "Pending":"قيد الانتظار"
+
 
 }

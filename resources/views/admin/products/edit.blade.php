@@ -82,6 +82,7 @@
                     @enderror
                 </div>
                 {{-- <div class="col md 6">
+
                     <label style="font-size: 12px;margin-right: 13px">{{ __('Unit') }}</label>
                     <input value="{{ $product->unit }}" type="text" class="form-control form-control-user"
                         id="exampleFirstName" placeholder="ربطة" name="unit">
@@ -94,6 +95,7 @@
 
             </div>
             {{-- <div class="form-group">
+
                 <label style="font-size: 12px;margin-right: 13px">{{ __('Enter Discount Rate') }}</label>
                 <input value="{{ $product->discount_rate == 100 . '%' ? null : $product->discount_rate }}"
                     type="number" class="form-control form-control-user" id="discount_price"
@@ -135,6 +137,7 @@
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <label
                         style="font-size: 12px;margin-right: 13px">{{ __('Inner Category') }}</label>
+
                     <select name="inner_category_id"
                         class="custom-select form-control @error('inner_category_id') is-invalid @enderror">
                         <option value="{{ $product->category->id }}" selected>
@@ -148,6 +151,7 @@
                 </div>
                 <div class="col-sm-6">
                     <label style="font-size: 12px;margin-right: 13px">{{ __('Photo') }}</label>
+
                     <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
                 </div>
             </div>
@@ -170,6 +174,7 @@
         
         @if (count($product->products) > 0)
             <a href="{{ route('admin.product_types.all', $product->id) }}"
+
                 class="btn btn-primary btn-user btn-block">
                 {{ __('Product Types') }}
             </a>

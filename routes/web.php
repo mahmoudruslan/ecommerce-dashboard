@@ -42,10 +42,6 @@ Route::group(
     ],
     function () {
         Route::get('customers/documentation', [CustomerController::class, 'allUnverifiedAccounts'])->name('customers.documentation');
-        Route::get('test', function() {
-            return config('governorates');
-
-        });
 
         Route::post('customers/active/{id}', [CustomerController::class, 'active'])->name('customer.active');
         Route::post('customers/not-active/{id}', [CustomerController::class, 'notActive'])->name('customer.not.active');

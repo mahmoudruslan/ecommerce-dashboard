@@ -158,6 +158,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCustomer"
                     aria-expanded="true" aria-controls="collapseCustomer">
                     <i class="fas fa-users fa-fw"></i>
+
                     <span>{{__('Customers')}}</span>
                 </a>
                 <div id="collapseCustomer" class="collapse" aria-labelledby="headingPages"

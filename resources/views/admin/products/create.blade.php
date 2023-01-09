@@ -57,6 +57,7 @@
                     </div>
 
                     {{-- <div class="col-sm-6">
+
                         <input type="text" class="form-control form-control-user" id="exampleinput"
                         placeholder="{{__('Unit')}}" name="unit">
                     @error('unit')
@@ -66,6 +67,7 @@
                     @enderror
                     </div> --}}
 {{-- 
+
                 </div>
                 <div class="form-group row"> --}}
                     <div class="col-sm-6 mb-3 mb-sm-0">

@@ -76,6 +76,7 @@ class ProductController extends Controller
                 'photo' => $photo,
                 'price' => $request->price ?? '---',
                 'unit' => $request->unit ?? '---',
+
                 'discount_price' => $request->discount_price,
                 'inner_category_id' => $request->inner_category_id,
                 'product_id' => null,
@@ -131,6 +132,7 @@ class ProductController extends Controller
                 // 'price' => $request->price,
                 // 'unit' => $request->unit,
                 // 'discount_price' => $request->discount_price,
+
                 'inner_category_id' => $request->inner_category_id,
             ]);
             return redirect()->back()->with(['success' => 'Updated Successfully']);
