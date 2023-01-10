@@ -9,6 +9,12 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">{{ __('Product Types') }}</h1>
         <p class="mb-4"></p>
+        <a style="margin-left: 20px" href="{{ route('admin.products.index') }}" class="btn btn-secondary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text">{{ __('Products') }}</span>
+        </a><br><br>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -97,6 +103,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $product_types->links() }}
                 </div>
             </div>
         </div>

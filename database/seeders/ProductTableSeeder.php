@@ -20,12 +20,17 @@ class ProductTableSeeder extends Seeder
         Product::factory()->count(100)->create();
 
         $products = Product::get();
+        $i = 0;
         foreach($products as $product)
         {
-            $product->update([
-                'product_id' => rand(1, 50),
-                'first_appearing' => $product->id,
-            ]);
+            $i++;
+            if($i > 15){
+                $product->update([
+                    'product_id' => rand(1, 15),
+                    'first_appearing' => $product->id,
+                ]);
+            }
+            
         }
 
     }

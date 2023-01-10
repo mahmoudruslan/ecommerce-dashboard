@@ -21,7 +21,7 @@ class ProductTypeController extends Controller
     {
         try {
             $product = Product::findOrFail($id);
-            $product_types = $product->products()->orderBy('first_appearing', 'DESC')->get();
+            $product_types = $product->products()->orderBy('first_appearing', 'DESC')->paginate(PAGINATION);
             return view('admin.product_types.index', compact('product_types', 'product'));
         } catch (\Exception $e) {
             return $e->getMessage();
