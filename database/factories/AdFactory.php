@@ -2,19 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Customer;
-use App\Models\Order;
-use App\Models\Product;
+use App\Models\Ad;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-class OrderFactory extends Factory
+class AdFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Order::class;
+    protected $model = Ad::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +21,11 @@ class OrderFactory extends Factory
      * @return array
      */
     public function definition()
-    {   
-        $customers = Customer::pluck('id');
+    {
+        static $i = 1;
         return [
-            'status' => 5,
-            'customer_id' => $customers->random(),
+            'target' => 'https://github.com/',
+            'photo' => 'github'. $i++ .'.png',
         ];
     }
 }

@@ -10,7 +10,7 @@ use App\Models\Product;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -35,15 +35,11 @@ class OrderController extends Controller
                 $cart_products = $cart->products;
                 foreach ($cart_products as $item) {
                     $product = Product::find($item['product_id']);
-                    if ($product->discount_price == null) {
-                        $price += $product->price * $item['quantity'];
-                    } else {
-                        $price += $product->discount_price * $item['quantity'];
-                    }
+                    $price += $product->price * $item['quantity'];
                 }
                 $order = Order::Create([ //create order
                     'customer_id' => $customer->id,
-                    'status' => '0',
+                    'status' => '3',
                     'notes' => $request->notes,
                     'price' => $price
                 ]);
@@ -55,13 +51,13 @@ class OrderController extends Controller
                         'order_id' => $order->id,
                         'product_id' => $product->id,
                         'name' => $product->name_ar,
-                        'price' => $product->discount_price ?? $product->price,
+                        'price' => $product->price,
                         'quantity' => $item['quantity'],
-                        'total' => $product->discount_price != null ? $product->discount_price * $item['quantity'] : $product->price * $item['quantity'],
+                        'total' => $product->price * $item['quantity'],
                     ]);
                 }
                 $cart->delete();
-                return $this->returnSuccess('200', __('Created Successfully'));
+                return $this->returnData('order_id',$order->id , __('Created Successfully'));
             }
             return $this->returnError('201', __('Cart not found'));
         } catch (\Exception $e) {
@@ -69,12 +65,18 @@ class OrderController extends Controller
         }
     }
 
-    public function delete($id)
+    public function cancel($id)
     {
         try {
-            $order = Order::findOrFail($id);
-            $order->delete();
-            return $this->returnSuccess('200', __('Deleted Successfully'));
+            $order = DB::table('orders')->find($id);
+            if($order->status == '3' || $order->status == '1')
+            {
+                $order = DB::table('orders')->where('id', $id)->update([
+                    'status' => '1'
+                ]);
+                return $this->returnSuccess('200', __('Canceled Successfully'));
+            }
+            return $this->returnError('201', __('The order cannot be cancelled'));
         } catch (\Exception $e) {
             return $this->returnError('404', 'not found');
         }

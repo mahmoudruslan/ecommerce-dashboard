@@ -13,20 +13,25 @@ class InnerCategoryController extends Controller
     public function show($id)
     {
         try {
-            $products = Product::where('inner_category_id', $id)->with(['types' => function ($query) {
+            $products = Product::where('inner_category_id', $id)->
+            whereNull('product_id')->
+            with(['types' => function ($query) {
                 $query->select(
                     'id',
                     'name_ar',
                     'details_ar',
                     'photo',
                     'price',
+                    'unit',
                     'discount_price',
+                    'inner_category_id',
                     'product_id',
                     'amount'
                 );
             }])
             
-            ->get(['id', 'name_ar', 'details_ar', 'photo', 'price', 'discount_price', 'product_id', 'amount']);
+            ->get(['id', 'name_ar', 'details_ar', 'photo', 'price', 'unit', 'discount_price', 'product_id', 'amount','inner_category_id']);
+
             if (!$products) {
                 return $this->returnError('404', 'categories not found');
             }

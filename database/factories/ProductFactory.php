@@ -24,7 +24,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         $categories = InnerCategory::pluck('id');
-
+        $arr = array('5', '10', '15', null);
         return [
             // 'first_appearing' => rand('0', '2'),
             'name_ar' => $this->faker->word,
@@ -34,7 +34,7 @@ class ProductFactory extends Factory
             'amount' => rand('10', '100'),
             'photo' => 'example.jpg',
             'price' => rand('111', '999'),
-            'discount_price' => rand('5', '30'),
+            'discount_price' =>  $arr[rand('0', '3')],
             'inner_category_id' => $categories->random(),
         ];
     }

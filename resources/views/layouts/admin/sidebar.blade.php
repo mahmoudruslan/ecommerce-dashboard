@@ -124,7 +124,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-bell fa-fw"></i>
@@ -135,6 +135,36 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('admin.messages.index')}}">{{__('Notifications')}}</a>
                         <a class="collapse-item" href="{{route('admin.messages.create')}}">{{__('Add Notifications')}}</a>
+                    </div>
+                </div>
+            </li> --}}
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-ad fa-fw"></i>
+                    <span>{{__('Ads')}}</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('admin.ads.index')}}">{{__('Ads')}}</a>
+                        <a class="collapse-item" href="{{route('admin.ads.create')}}">{{__('Add ads')}}</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCustomer"
+                    aria-expanded="true" aria-controls="collapseCustomer">
+                    <i class="fas fa-users fa-fw"></i>
+
+                    <span>{{__('Customers')}}</span>
+                </a>
+                <div id="collapseCustomer" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('customers.index')}}">{{__('Customers')}}</a>
                     </div>
                 </div>
             </li>

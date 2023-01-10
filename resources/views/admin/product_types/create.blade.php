@@ -6,6 +6,13 @@
 
     <div class="row">
         <div class="p-5 col-lg-12">
+
+        <a style="margin-left: 20px" href="{{ route('admin.product_types.all', $product->id) }}" class="btn btn-secondary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text">{{ __('Types') }}</span>
+        </a>
             @if (Session::has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ __(Session::get('success')) }}
@@ -17,9 +24,15 @@
             <div class="text-center">
             </div>
             <div class="text-center">
+                @if (isset($product))
+                <h1 class="h4 text-gray-900 mb-4">{{ __('Add Product Types') . ' :' . __($product['name_' .app()->getLocale()]) }}</h1>
+
+                @else
                 <h1 class="h4 text-gray-900 mb-4">{{ __('Add Products') }}</h1>
+
+                @endif
             </div>
-            <form class="user insubmit" method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
+            <form class="user insubmit" method="POST" action="{{ route('admin.product_types.store') }}" enctype="multipart/form-data">
                 @csrf
                 @if(isset($product))
                 <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -56,8 +69,7 @@
                     @enderror
                     </div>
 
-                    {{-- <div class="col-sm-6">
-
+                    <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="exampleinput"
                         placeholder="{{__('Unit')}}" name="unit">
                     @error('unit')
@@ -65,11 +77,10 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    </div> --}}
-{{-- 
+                    </div>
 
                 </div>
-                <div class="form-group row"> --}}
+                <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" class="form-control form-control-user" id="details_en"
                             placeholder="{{ __('Enter Details_en') }}" name="details_en">
@@ -80,7 +91,7 @@
                         @enderror
                     </div>
 
-                {{-- <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="number" class="form-control form-control-user" id="discount_price"
                         placeholder="{{ __('Enter Discount Rate') }} (%)" name="discount_price">
                     @error('discount_price')
@@ -88,9 +99,9 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                </div> --}}
+                </div>
             </div>
-                {{-- <div class="form-group row">
+                <div class="form-group row">
                     <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="amount"
                             placeholder="{{ __('Enter Amount') }}" name="amount">
@@ -109,7 +120,7 @@
                             </span>
                         @enderror
                     </div>
-                </div> --}}
+                </div>
 
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">

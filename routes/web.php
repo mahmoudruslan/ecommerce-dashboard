@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
@@ -12,9 +13,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PrintController;
-use App\Models\Customer;
-use App\Models\Order;
-use App\Models\OrderProduct;
 use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -30,7 +28,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-define('PAGINATION', 50);
+define('PAGINATION', 20);
 
 Route::get('/', function () {
     return view('auth.login');
@@ -44,7 +42,11 @@ Route::group(
     ],
     function () {
         Route::get('customers/documentation', [CustomerController::class, 'allUnverifiedAccounts'])->name('customers.documentation');
-        Route::get('customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+
+        Route::post('customers/active/{id}', [CustomerController::class, 'active'])->name('customer.active');
+        Route::post('customers/not-active/{id}', [CustomerController::class, 'notActive'])->name('customer.not.active');
+        Route::resource('customers', CustomerController::class);
+
 
 
         Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
@@ -55,9 +57,11 @@ Route::group(
             Route::resource('inner_categories', InnerCategoryController::class);
             Route::resource('products', ProductController::class);
             Route::resource('product_types', ProductTypeController::class);
+            Route::get('product_types/all/{product_id}', [ProductTypeController::class, 'all'])->name('product_types.all');
             Route::resource('orders', OrderController::class);
             Route::resource('notifications', NotificationController::class);
             Route::resource('messages', MessageController::class);
+            Route::resource('ads', AdController::class);
 
 
             Route::get('/export-orders-excel', [OrderController::class, 'exportExcel'])->name('export.excel');

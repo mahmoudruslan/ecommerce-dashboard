@@ -191,6 +191,30 @@
     "Quantity":"الكمية المطلوبة",
     "required products":"المنتجات المطلوبة",
     "Product names":"أسماء المنتجات",
-    "Number":"العدد"
+    "Number":"العدد",
+    "Customer Name":"اسم العميل",
+    "Product removed":"تم حذف المنتج",
+    "Canceled Successfully":"تم الإلغاء بنجتح",
+    "The order cannot be cancelled":"لا يمكن إلغاء الطلب",
+    "Ad photo":"صورة الإعلان",
+    "Photo":"الصورة",
+    "Ads":"الإعلانات",
+    "Add ads":"إضافة إعلانات",
+    "Link":"الرابط",
+    "Edit Ad":"تعدبل الإعلان",
+    "Enter Link":"أدخل الرابط",
+    "Ad Details":"تفاصيل الإعلان",
+    "There is no data to display":"لا يوجد بيانات لعرضها",
+    "Pending":"قيد الانتظار",
+    "Active":"تفعيل",
+    "Not active":"إلغاء التفعيل",
+    "Customers":"العملاء",
+    "Order Products":"منتجات الطلب",
+    "Unit":"الوحدة",
+
+    "The higher the number, the higher the priority":"كلما زاد الرقم زادت أولوية الظهور",
+    "price before discount":"السعر قبل الخصم",
+    "Pending":"قيد الانتظار"
+
 
 }

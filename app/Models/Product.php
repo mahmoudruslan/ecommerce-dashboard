@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['first_appearing', 'name_en','name_ar',  'details_ar',  'details_en', 'amount', 'photo', 'price', 'discount_price', 'inner_category_id', 'product_id'];
+    protected $fillable = ['first_appearing', 'name_en','name_ar',  'details_ar',  'details_en', 'amount', 'photo', 'price', 'unit', 'discount_price', 'inner_category_id', 'product_id'];
     protected $appends = ['name', 'details'];
 
     public $timestamps = true;
@@ -40,19 +40,27 @@ class Product extends Model
     public function setDiscountPriceAttribute($value)
     {
         if($value != null && $value > 0){
-            $value = str_replace("%","",$value);
-            $discount_price = $this->attributes['price'] * $value / 100;
-            $this->attributes['discount_price'] = $this->attributes['price'] - $discount_price;
+            $percentage = str_replace("","%",$value);
+            $discount_price = $this->attributes['price'] * $percentage / 100;
+            $this->attributes['discount_price'] = round($this->attributes['price'] - $discount_price, 2);
+        }else{
+            $this->attributes['discount_price'] = null;
         }
+}
 
+    public function setPriceAttribute($value)
+    {
+            $this->attributes['price'] = round($value, 2);
     }
 
     public function getDiscountRateAttribute()
     {
+        if($this->attributes['discount_price'] != null && $this->attributes['discount_price'] > 0){
         $discount = $this->attributes['price'] - $this->attributes['discount_price'];
         $discount_rate = $discount / $this->attributes['price'];
         return round((float)$discount_rate * 100);
     }
+}
 
     public function getNameAttribute()
     {
@@ -61,6 +69,10 @@ class Product extends Model
     public function getDetailsAttribute()
     {
         return $this->details_ar;
+    }
+    public function getPriceAttribute($value)
+    {
+        return $this->discount_price ?? $value;
     }
 
 }
