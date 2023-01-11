@@ -38,6 +38,6 @@
             </table>
         </div>
         <div class="col-lg-5 pt-10 p-4"><img style="width: 90%; max-height: 90%;"
-                src="{{ asset('images/categories/' . $inner_category->photo) }}"></div>
+                src="{{ asset('images/inner_categories/' . $inner_category->photo) }}"></div>
     </div>
 @endsection
