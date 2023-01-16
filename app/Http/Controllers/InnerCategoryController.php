@@ -96,7 +96,7 @@ class InnerCategoryController extends Controller
     public function update(InnerCategoryRequest $request, $id)
     {
         try {
-            $photo =$this->saveImage('categories', $request->photo);
+            $photo =$this->saveImage('inner_categories', $request->photo);
             $inner_category = InnerCategory::findOrFail($id);
             $inner_category->update([
                 'name_ar' => $request->name_ar,
