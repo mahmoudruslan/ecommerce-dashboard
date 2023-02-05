@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Validator;
 
 
@@ -38,18 +37,6 @@ class CustomerController extends Controller
                 'password' => $request->password,
             ]);
             return $this->returnSuccess('200', __('Updated Successfully'));
-        } catch (\Exception $e) {
-            return $this->returnError($e->getCode(), $e->getMessage());
-        }
-    }
-
-    public function destroy()
-    {
-        try {
-            $customer = Auth::guard('sanctum')->user();
-            $customer->currentAccessToken()->delete();
-            $customer->delete();
-            return $this->returnSuccess('200', __('Deleted Successfully'));
         } catch (\Exception $e) {
             return $this->returnError($e->getCode(), $e->getMessage());
         }

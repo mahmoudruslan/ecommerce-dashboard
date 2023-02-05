@@ -37,8 +37,6 @@ Route::get('governorates', [GovernorateController::class, 'index']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('profile/update/{id}', [CustomerController::class, 'update']);
-    Route::delete('delete/customer', [CustomerController::class, 'destroy']);
-
     Route::get('active/account', [AuthController::class, 'activeAccount']);
     Route::get('products', [ProductController::class, 'index']);
     Route::post('order/store', [OrderController::class, 'store']);
