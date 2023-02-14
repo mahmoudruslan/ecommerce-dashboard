@@ -74,10 +74,9 @@ class ProductController extends Controller
                 'details_en' => $request->details_en ?? '---',
                 'amount' => $request->amount ?? '---',
                 'photo' => $photo,
-                'price' => $request->price ?? '---',
+                'price' => '0',
                 'unit' => $request->unit ?? '---',
-
-                'discount_price' => $request->discount_price,
+                'discount_price' => '0',
                 'inner_category_id' => $request->inner_category_id,
                 'product_id' => null,
             ]);

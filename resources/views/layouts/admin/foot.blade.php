@@ -39,9 +39,7 @@
 
                 },
                 error: function(reject) {
-
                 }
-
             });
         });
     </script>

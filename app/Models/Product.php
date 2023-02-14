@@ -48,10 +48,14 @@ class Product extends Model
         }
 }
 
-    public function setPriceAttribute($value)
-    {
-            $this->attributes['price'] = round($value, 2);
+public function setPriceAttribute($value)
+{
+    if ($value != null && $value > 0) {
+        $this->attributes['price'] = round($value, 2);
+    }else{
+        $this->attributes['price'] = '0';
     }
+}
 
     public function getDiscountRateAttribute()
     {
